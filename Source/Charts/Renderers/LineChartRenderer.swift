@@ -540,8 +540,8 @@ open class LineChartRenderer: LineRadarRenderer
                                 dataSetIndex: i,
                                 viewPortHandler: viewPortHandler),
                             point: CGPoint(
-                                x: pt.x,
-                                y: pt.y - CGFloat(valOffset) - valueFont.lineHeight),
+                                x: pt.x + dataSet.valueLabelOffset.x,
+                                y: pt.y - CGFloat(valOffset) - valueFont.lineHeight + dataSet.valueLabelOffset.y),
                             align: .center,
                             attributes: [NSAttributedString.Key.font: valueFont, NSAttributedString.Key.foregroundColor: dataSet.valueTextColorAt(j)])
                     }

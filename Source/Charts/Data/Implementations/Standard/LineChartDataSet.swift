@@ -15,6 +15,7 @@ import CoreGraphics
 
 open class LineChartDataSet: LineRadarChartDataSet, ILineChartDataSet
 {
+    public var valueLabelOffset: CGPoint = CGPoint(x: 0, y: 0)
     public var lineGradient: CGGradient?
     
     @objc(LineChartMode)

@@ -79,4 +79,6 @@ public protocol ILineChartDataSet: ILineRadarChartDataSet
     var fillFormatter: IFillFormatter? { get set }
     
     var lineGradient: CGGradient? { get set }
+    
+    var valueLabelOffset: CGPoint { get set }
 }
