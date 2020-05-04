@@ -173,8 +173,36 @@ open class LineChartRenderer: LineRadarRenderer
         
         context.beginPath()
         context.addPath(cubicPath)
-        context.setStrokeColor(drawingColor.cgColor)
-        context.strokePath()
+        
+        // FIREHOSE
+        if let lineGradient = dataSet.lineGradient {
+            let rect = viewPortHandler.contentRect
+            context.replacePathWithStrokedPath()
+            context.clip()
+            let radians = (360.0 - 0).DEG2RAD
+            let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
+            let xAngleDelta = CGFloat(cos(radians)) * rect.width / CGFloat(2.0)
+            let yAngleDelta = CGFloat(sin(radians)) * rect.height / CGFloat(2.0)
+            let startPoint = CGPoint(
+                x: centerPoint.x - xAngleDelta,
+                y: centerPoint.y - yAngleDelta
+            )
+            let endPoint = CGPoint(
+                x: centerPoint.x + xAngleDelta,
+                y: centerPoint.y + yAngleDelta
+            )
+            
+            context.drawLinearGradient(lineGradient,
+                start: startPoint,
+                end: endPoint,
+                options: [.drawsAfterEndLocation, .drawsBeforeStartLocation]
+            )
+        } else {
+            context.setStrokeColor(drawingColor.cgColor)
+            context.strokePath()
+        }
+        // FIREHOSE
+
         
         context.restoreGState()
     }
